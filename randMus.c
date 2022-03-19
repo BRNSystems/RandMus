@@ -1,28 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int main()
-{
-	//create data file
-	FILE *f = fopen("lastSong.txt", "w");	
-	if(f==NULL)
-		return 0;
-	int num = 6;
-	srand(time(NULL));
-	int a[num];
-	int i;
-	for(i=0;i<num;i++)
-	{
-		a[i] = rand() % 50 + 1;
-		//since all output is piped into another program to make the sound, regular printf won't work
-		//instead we need to write to a file that can be read in another terminal instance
-		fprintf(f,"a[%d]: %d\n", i, a[i]);
-	}
-	fclose(f);
-	for(i=0;;i++)
-	{	
-		//this is where all the magic happens
-		putchar(((i*(i>>a[0]|i>>a[1])&a[2]&i>>a[3]))^(i&i>>a[4]|i>>a[5]));
-	} 
-	return 0;
+
+const int num_samples = 6;
+const int num_sample_repeats = 1;
+
+int main() {
+    srand(time(NULL)); // seed random number generator
+    int a[num_samples]; // array of random numbers
+    int i; // loop counter
+    int c; // out character
+    int tmp; // temp character
+    int x; // loop counter
+    int y;  // loop counter
+    while (1){
+        for (x = 0; x < num_samples; x++) {
+            a[x] = rand() % 20 + 1; // set a[x] to a random number between 1 and 50
+        }
+        for (y = 0; y < num_sample_repeats; y++) {
+            for (i = 0;i<32000; i++) { // loop forever
+                c = i >> a[0]; // shift right i by a[0]
+                c = c | i >> a[1]; // or c by i shifted right by a[1]
+                c = c + (i * 1.5); // multiply c by i
+                c = c & a[2]; // and c by a[2]
+                c = c | i >> a[3]; // or c by i shifted right by a[3]
+                tmp = i & i >> a[4]; // and i by i shifted right by a[4]
+                tmp = tmp | i >> a[5]; // or tmp by i shifted right by a[5]
+                c = c ^ tmp; // xor c by tmp
+                putchar(c); // print c
+            }
+        }
+    }
 }

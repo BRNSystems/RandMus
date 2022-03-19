@@ -1,3 +1,4 @@
+
 RandMus
 =======
 
@@ -12,12 +13,10 @@ Instructions:
 
 	cd into the RandMus directory
 	
-	type "make" to compile
+	type "make" to compile and run(play)
 	
-	type "make run" to run the program
+	type "make clean" to remove the compiled files
+
+	type "make record" to record a random tune
 	
 	to quit the program type ctrl-c
-	
-	to view the random values for the current or last song, first open another terminal window, cd to the RandMus directory, and run the command "cat lastSong.txt"
-	
-	spend hours messing around with it (in a good way)
