@@ -11,6 +11,6 @@ run: compile
 
 record: compile
 	rm -f out.ogg
-	./randMus|ffmpeg -f u16le -ar 8000 -ac 1 -i - out.ogg
+	./randMus|ffmpeg -f u16le -ar 8000 -ac 1 -i - -to 00:05:00 out.ogg
 
 all: compile run
